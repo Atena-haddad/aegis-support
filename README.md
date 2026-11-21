@@ -1,3 +1,6 @@
+Live API & Interactive Docs: [https://aegis-support.onrender.com/docs](https://aegis-support.onrender.com/docs)
+GitHub Repository: [https://github.com/Atena-haddad/aegis-support](https://github.com/Atena-haddad/aegis-support)
+
 # AegisSupport — Hybrid Classical-ML & Agentic LLM Triage Engine
 
 An enterprise technical support and incident triage system combining **Classical ML/NLP routing** and **Out-of-Distribution (OOD) novelty detection** with a **self-correcting LangGraph multi-agent RAG pipeline**, **PII privacy guardrails**, and **automated evaluation benchmarks**.
