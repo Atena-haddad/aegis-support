@@ -1,0 +1,129 @@
+ticket_id,text,intent,priority,needs_agent
+TKT-000-0,I cannot log into my dashboard after resetting my 2FA token.,account_access,high,1
+TKT-000-1,Urgent: I cannot log into my dashboard after resetting my 2FA token.,account_access,high,1
+TKT-000-2,"Hi team, I cannot log into my dashboard after resetting my 2FA token.",account_access,high,1
+TKT-000-3,Help needed - I cannot log into my dashboard after resetting my 2FA token.,account_access,high,1
+TKT-001-0,Locked out of SSO login with SAML error 403.,account_access,high,1
+TKT-001-1,Urgent: Locked out of SSO login with SAML error 403.,account_access,high,1
+TKT-001-2,"Hi team, Locked out of SSO login with SAML error 403.",account_access,high,1
+TKT-001-3,Help needed - Locked out of SSO login with SAML error 403.,account_access,high,1
+TKT-002-0,How do I invite a new team member to our workspace?,account_access,low,0
+TKT-002-1,Urgent: How do I invite a new team member to our workspace?,account_access,low,0
+TKT-002-2,"Hi team, How do I invite a new team member to our workspace?",account_access,low,0
+TKT-002-3,Help needed - How do I invite a new team member to our workspace?,account_access,low,0
+TKT-003-0,Password reset email never arrived in my inbox.,account_access,medium,0
+TKT-003-1,Urgent: Password reset email never arrived in my inbox.,account_access,medium,0
+TKT-003-2,"Hi team, Password reset email never arrived in my inbox.",account_access,medium,0
+TKT-003-3,Help needed - Password reset email never arrived in my inbox.,account_access,medium,0
+TKT-004-0,Need to update role permissions for our data science interns.,account_access,low,0
+TKT-004-1,Urgent: Need to update role permissions for our data science interns.,account_access,low,0
+TKT-004-2,"Hi team, Need to update role permissions for our data science interns.",account_access,low,0
+TKT-004-3,Help needed - Need to update role permissions for our data science interns.,account_access,low,0
+TKT-005-0,API key authentication failing with invalid bearer token.,account_access,high,1
+TKT-005-1,Urgent: API key authentication failing with invalid bearer token.,account_access,high,1
+TKT-005-2,"Hi team, API key authentication failing with invalid bearer token.",account_access,high,1
+TKT-005-3,Help needed - API key authentication failing with invalid bearer token.,account_access,high,1
+TKT-006-0,Where do I enable single sign-on for Okta?,account_access,low,0
+TKT-006-1,Urgent: Where do I enable single sign-on for Okta?,account_access,low,0
+TKT-006-2,"Hi team, Where do I enable single sign-on for Okta?",account_access,low,0
+TKT-006-3,Help needed - Where do I enable single sign-on for Okta?,account_access,low,0
+TKT-007-0,My session keeps expiring every 5 minutes.,account_access,medium,1
+TKT-007-1,Urgent: My session keeps expiring every 5 minutes.,account_access,medium,1
+TKT-007-2,"Hi team, My session keeps expiring every 5 minutes.",account_access,medium,1
+TKT-007-3,Help needed - My session keeps expiring every 5 minutes.,account_access,medium,1
+TKT-008-0,We were double charged on our October cloud invoice.,billing,high,1
+TKT-008-1,Urgent: We were double charged on our October cloud invoice.,billing,high,1
+TKT-008-2,"Hi team, We were double charged on our October cloud invoice.",billing,high,1
+TKT-008-3,Help needed - We were double charged on our October cloud invoice.,billing,high,1
+TKT-009-0,How do I download VAT invoices for accounting?,billing,low,0
+TKT-009-1,Urgent: How do I download VAT invoices for accounting?,billing,low,0
+TKT-009-2,"Hi team, How do I download VAT invoices for accounting?",billing,low,0
+TKT-009-3,Help needed - How do I download VAT invoices for accounting?,billing,low,0
+TKT-010-0,Want to upgrade our workspace from Starter to Pro tier.,billing,low,0
+TKT-010-1,Urgent: Want to upgrade our workspace from Starter to Pro tier.,billing,low,0
+TKT-010-2,"Hi team, Want to upgrade our workspace from Starter to Pro tier.",billing,low,0
+TKT-010-3,Help needed - Want to upgrade our workspace from Starter to Pro tier.,billing,low,0
+TKT-011-0,Credit card payment failed during automatic renewal.,billing,high,1
+TKT-011-1,Urgent: Credit card payment failed during automatic renewal.,billing,high,1
+TKT-011-2,"Hi team, Credit card payment failed during automatic renewal.",billing,high,1
+TKT-011-3,Help needed - Credit card payment failed during automatic renewal.,billing,high,1
+TKT-012-0,Can we switch from monthly to annual billing cycle?,billing,low,0
+TKT-012-1,Urgent: Can we switch from monthly to annual billing cycle?,billing,low,0
+TKT-012-2,"Hi team, Can we switch from monthly to annual billing cycle?",billing,low,0
+TKT-012-3,Help needed - Can we switch from monthly to annual billing cycle?,billing,low,0
+TKT-013-0,Unexpected overage charges on vector storage this month.,billing,medium,1
+TKT-013-1,Urgent: Unexpected overage charges on vector storage this month.,billing,medium,1
+TKT-013-2,"Hi team, Unexpected overage charges on vector storage this month.",billing,medium,1
+TKT-013-3,Help needed - Unexpected overage charges on vector storage this month.,billing,medium,1
+TKT-014-0,Update billing email address for finance department.,billing,low,0
+TKT-014-1,Urgent: Update billing email address for finance department.,billing,low,0
+TKT-014-2,"Hi team, Update billing email address for finance department.",billing,low,0
+TKT-014-3,Help needed - Update billing email address for finance department.,billing,low,0
+TKT-015-0,Requesting a refund for unused seats cancelled yesterday.,billing,medium,1
+TKT-015-1,Urgent: Requesting a refund for unused seats cancelled yesterday.,billing,medium,1
+TKT-015-2,"Hi team, Requesting a refund for unused seats cancelled yesterday.",billing,medium,1
+TKT-015-3,Help needed - Requesting a refund for unused seats cancelled yesterday.,billing,medium,1
+TKT-016-0,Production inference endpoint returning HTTP 502 Bad Gateway.,technical_bug,high,1
+TKT-016-1,Urgent: Production inference endpoint returning HTTP 502 Bad Gateway.,technical_bug,high,1
+TKT-016-2,"Hi team, Production inference endpoint returning HTTP 502 Bad Gateway.",technical_bug,high,1
+TKT-016-3,Help needed - Production inference endpoint returning HTTP 502 Bad Gateway.,technical_bug,high,1
+TKT-017-0,Webhook payload drops nested JSON metadata intermittently.,technical_bug,high,1
+TKT-017-1,Urgent: Webhook payload drops nested JSON metadata intermittently.,technical_bug,high,1
+TKT-017-2,"Hi team, Webhook payload drops nested JSON metadata intermittently.",technical_bug,high,1
+TKT-017-3,Help needed - Webhook payload drops nested JSON metadata intermittently.,technical_bug,high,1
+TKT-018-0,Python SDK throws TimeoutError when batch size exceeds 64.,technical_bug,medium,1
+TKT-018-1,Urgent: Python SDK throws TimeoutError when batch size exceeds 64.,technical_bug,medium,1
+TKT-018-2,"Hi team, Python SDK throws TimeoutError when batch size exceeds 64.",technical_bug,medium,1
+TKT-018-3,Help needed - Python SDK throws TimeoutError when batch size exceeds 64.,technical_bug,medium,1
+TKT-019-0,Vector index sync stuck at 99% for over two hours.,technical_bug,high,1
+TKT-019-1,Urgent: Vector index sync stuck at 99% for over two hours.,technical_bug,high,1
+TKT-019-2,"Hi team, Vector index sync stuck at 99% for over two hours.",technical_bug,high,1
+TKT-019-3,Help needed - Vector index sync stuck at 99% for over two hours.,technical_bug,high,1
+TKT-020-0,CSV export button is unresponsive on Safari browser.,technical_bug,low,0
+TKT-020-1,Urgent: CSV export button is unresponsive on Safari browser.,technical_bug,low,0
+TKT-020-2,"Hi team, CSV export button is unresponsive on Safari browser.",technical_bug,low,0
+TKT-020-3,Help needed - CSV export button is unresponsive on Safari browser.,technical_bug,low,0
+TKT-021-0,Memory leak observed in worker container after 12 hours.,technical_bug,high,1
+TKT-021-1,Urgent: Memory leak observed in worker container after 12 hours.,technical_bug,high,1
+TKT-021-2,"Hi team, Memory leak observed in worker container after 12 hours.",technical_bug,high,1
+TKT-021-3,Help needed - Memory leak observed in worker container after 12 hours.,technical_bug,high,1
+TKT-022-0,Rate limit headers show negative remaining quota.,technical_bug,medium,1
+TKT-022-1,Urgent: Rate limit headers show negative remaining quota.,technical_bug,medium,1
+TKT-022-2,"Hi team, Rate limit headers show negative remaining quota.",technical_bug,medium,1
+TKT-022-3,Help needed - Rate limit headers show negative remaining quota.,technical_bug,medium,1
+TKT-023-0,Embeddings endpoint returns NaN values for empty strings.,technical_bug,high,1
+TKT-023-1,Urgent: Embeddings endpoint returns NaN values for empty strings.,technical_bug,high,1
+TKT-023-2,"Hi team, Embeddings endpoint returns NaN values for empty strings.",technical_bug,high,1
+TKT-023-3,Help needed - Embeddings endpoint returns NaN values for empty strings.,technical_bug,high,1
+TKT-024-0,Please add dark mode support to the analytics console.,feature_request,low,0
+TKT-024-1,Urgent: Please add dark mode support to the analytics console.,feature_request,low,0
+TKT-024-2,"Hi team, Please add dark mode support to the analytics console.",feature_request,low,0
+TKT-024-3,Help needed - Please add dark mode support to the analytics console.,feature_request,low,0
+TKT-025-0,Would love native Terraform provider support for deployments.,feature_request,low,0
+TKT-025-1,Urgent: Would love native Terraform provider support for deployments.,feature_request,low,0
+TKT-025-2,"Hi team, Would love native Terraform provider support for deployments.",feature_request,low,0
+TKT-025-3,Help needed - Would love native Terraform provider support for deployments.,feature_request,low,0
+TKT-026-0,Can you support EU-central Frankfurt data residency?,feature_request,medium,1
+TKT-026-1,Urgent: Can you support EU-central Frankfurt data residency?,feature_request,medium,1
+TKT-026-2,"Hi team, Can you support EU-central Frankfurt data residency?",feature_request,medium,1
+TKT-026-3,Help needed - Can you support EU-central Frankfurt data residency?,feature_request,medium,1
+TKT-027-0,Add Slack alert integration when latency exceeds threshold.,feature_request,low,0
+TKT-027-1,Urgent: Add Slack alert integration when latency exceeds threshold.,feature_request,low,0
+TKT-027-2,"Hi team, Add Slack alert integration when latency exceeds threshold.",feature_request,low,0
+TKT-027-3,Help needed - Add Slack alert integration when latency exceeds threshold.,feature_request,low,0
+TKT-028-0,Support custom OpenTelemetry exporters for tracing.,feature_request,medium,0
+TKT-028-1,Urgent: Support custom OpenTelemetry exporters for tracing.,feature_request,medium,0
+TKT-028-2,"Hi team, Support custom OpenTelemetry exporters for tracing.",feature_request,medium,0
+TKT-028-3,Help needed - Support custom OpenTelemetry exporters for tracing.,feature_request,medium,0
+TKT-029-0,Allow exporting evaluation metrics directly to Parquet.,feature_request,low,0
+TKT-029-1,Urgent: Allow exporting evaluation metrics directly to Parquet.,feature_request,low,0
+TKT-029-2,"Hi team, Allow exporting evaluation metrics directly to Parquet.",feature_request,low,0
+TKT-029-3,Help needed - Allow exporting evaluation metrics directly to Parquet.,feature_request,low,0
+TKT-030-0,Feature request: role-based access control per project.,feature_request,medium,0
+TKT-030-1,Urgent: Feature request: role-based access control per project.,feature_request,medium,0
+TKT-030-2,"Hi team, Feature request: role-based access control per project.",feature_request,medium,0
+TKT-030-3,Help needed - Feature request: role-based access control per project.,feature_request,medium,0
+TKT-031-0,Add webhook signature verification examples in Python docs.,feature_request,low,0
+TKT-031-1,Urgent: Add webhook signature verification examples in Python docs.,feature_request,low,0
+TKT-031-2,"Hi team, Add webhook signature verification examples in Python docs.",feature_request,low,0
+TKT-031-3,Help needed - Add webhook signature verification examples in Python docs.,feature_request,low,0

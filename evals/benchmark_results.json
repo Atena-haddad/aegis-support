@@ -1,0 +1,172 @@
+{
+  "summary": {
+    "total_eval_cases": 12,
+    "llm_call_reduction_pct": 41.7,
+    "routing_accuracy_pct": 91.7,
+    "critic_grounding_rate_pct": 100.0,
+    "ood_escalation_accuracy_pct": 83.3,
+    "ml_router_p95_latency_ms": 1796.07,
+    "end_to_end_p95_latency_ms": 8462.96
+  },
+  "details": [
+    {
+      "query": "How do I download VAT invoices for accounting?",
+      "execution_path": "CLASSICAL_ML_FAST_PATH",
+      "expected_path": "CLASSICAL_ML_FAST_PATH",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 66.57,
+      "total_latency_ms": 136.28
+    },
+    {
+      "query": "How do I invite a new team member to our workspace?",
+      "execution_path": "CLASSICAL_ML_FAST_PATH",
+      "expected_path": "CLASSICAL_ML_FAST_PATH",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 19.09,
+      "total_latency_ms": 55.11
+    },
+    {
+      "query": "Can we switch from monthly to annual billing cycle?",
+      "execution_path": "CLASSICAL_ML_FAST_PATH",
+      "expected_path": "CLASSICAL_ML_FAST_PATH",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 622.34,
+      "total_latency_ms": 677.53
+    },
+    {
+      "query": "Please add dark mode support to the analytics console.",
+      "execution_path": "CLASSICAL_ML_FAST_PATH",
+      "expected_path": "CLASSICAL_ML_FAST_PATH",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 24.33,
+      "total_latency_ms": 71.48
+    },
+    {
+      "query": "Production inference endpoint returning HTTP 502 Bad Gateway.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 23.68,
+      "total_latency_ms": 2565.95
+    },
+    {
+      "query": "Locked out of SSO login with SAML error 403.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 838.32,
+      "total_latency_ms": 2887.9
+    },
+    {
+      "query": "Python SDK throws TimeoutError when batch size exceeds 64.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": true,
+      "expected_escalate": false,
+      "escalation_correct": false,
+      "redacted_pii": [],
+      "ml_latency_ms": 1320.5,
+      "total_latency_ms": 3968.58
+    },
+    {
+      "query": "Vector index sync stuck at 99% for over two hours.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 411.52,
+      "total_latency_ms": 1945.37
+    },
+    {
+      "query": "Webhook payload drops nested JSON metadata intermittently.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 116.78,
+      "total_latency_ms": 3066.7
+    },
+    {
+      "query": "User dev@acme.io with key ags_live_12345 getting HTTP 401 invalid bearer token.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": false,
+      "escalation_correct": true,
+      "redacted_pii": [
+        "EMAIL:dev@acme.io",
+        "API_KEY:ags_live_12345"
+      ],
+      "ml_latency_ms": 674.18,
+      "total_latency_ms": 2646.33
+    },
+    {
+      "query": "Our quantum satellite telemetry uplink is desynchronizing with the orbital relay.",
+      "execution_path": "AGENTIC_RAG_WITH_CRITIC",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": true,
+      "is_grounded": true,
+      "escalate_to_human": true,
+      "expected_escalate": true,
+      "escalation_correct": true,
+      "redacted_pii": [],
+      "ml_latency_ms": 178.2,
+      "total_latency_ms": 13956.1
+    },
+    {
+      "query": "How do I configure BGP peering on a Cisco ASR 9000 router?",
+      "execution_path": "CLASSICAL_ML_FAST_PATH",
+      "expected_path": "AGENTIC_RAG_WITH_CRITIC",
+      "path_correct": false,
+      "is_grounded": true,
+      "escalate_to_human": false,
+      "expected_escalate": true,
+      "escalation_correct": false,
+      "redacted_pii": [],
+      "ml_latency_ms": 2377.32,
+      "total_latency_ms": 2543.48
+    }
+  ]
+}
