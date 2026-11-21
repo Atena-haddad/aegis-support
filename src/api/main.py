@@ -47,6 +47,15 @@ class TicketResponse(BaseModel):
     total_latency_ms: float
 
 
+@app.get("/")
+def root():
+    return {
+        "service": "AegisSupport — Hybrid ML & Agentic Triage API",
+        "status": "live",
+        "docs": "/docs",
+        "health": "/health",
+    }
+
 @app.get("/health")
 def health_check():
     return {"status": "healthy", "service": "aegis-support"}
