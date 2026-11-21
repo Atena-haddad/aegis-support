@@ -2,7 +2,9 @@ import time
 import joblib
 import numpy as np
 from dataclasses import dataclass
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
+
+MODEL_NAME = "BAAI/bge-small-en-v1.5"
 
 
 @dataclass
@@ -18,8 +20,8 @@ class RoutingDecision:
 
 
 class MLTriageRouter:
-    def __init__(self, artifacts_dir: str = "artifacts", embedder: SentenceTransformer | None = None):
-        self.embedder = embedder or SentenceTransformer("all-MiniLM-L6-v2")
+    def __init__(self, artifacts_dir: str = "artifacts", embedder: TextEmbedding | None = None):
+        self.embedder = embedder or TextEmbedding(model_name=MODEL_NAME)
         self.intent_clf = joblib.load(f"{artifacts_dir}/intent_clf.joblib")
         self.priority_clf = joblib.load(f"{artifacts_dir}/priority_clf.joblib")
         self.route_clf = joblib.load(f"{artifacts_dir}/route_clf.joblib")
@@ -27,7 +29,7 @@ class MLTriageRouter:
 
     def route(self, text: str) -> RoutingDecision:
         start = time.perf_counter()
-        emb = self.embedder.encode([text], normalize_embeddings=True)
+        emb = np.array(list(self.embedder.embed([text])))
 
         intent_probs = self.intent_clf.predict_proba(emb)[0]
         best_idx = int(np.argmax(intent_probs))

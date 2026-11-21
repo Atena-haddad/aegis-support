@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 COPY data/ ./data/
 
-# Train and bake the Classical ML router & OOD detector artifacts into the image
+# Pre-cache ONNX embedding model & train router artifacts into the Docker image
 RUN python src/ml_router/train.py
 
 EXPOSE 8080

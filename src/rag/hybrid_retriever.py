@@ -4,7 +4,9 @@ import re
 import numpy as np
 from dataclasses import dataclass
 from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
+
+MODEL_NAME = "BAAI/bge-small-en-v1.5"
 
 
 @dataclass
@@ -17,16 +19,9 @@ class RetrievedChunk:
 
 
 class HybridRetriever:
-    """
-    Memory-efficient Hybrid RAG Retriever:
-    1. Lexical search via BM25 (exact error codes, SOP IDs)
-    2. Semantic search via shared Sentence-Transformer embeddings
-    3. Reciprocal Rank Fusion (RRF) + exact token-overlap boost reranking
-    """
-
-    def __init__(self, docs_dir: str = "data/docs", embedder: SentenceTransformer | None = None):
+    def __init__(self, docs_dir: str = "data/docs", embedder: TextEmbedding | None = None):
         self.docs_dir = docs_dir
-        self.embedder = embedder or SentenceTransformer("all-MiniLM-L6-v2")
+        self.embedder = embedder or TextEmbedding(model_name=MODEL_NAME)
         self.chunks: list[dict] = []
         self._load_and_index()
 
@@ -56,7 +51,7 @@ class HybridRetriever:
         self.bm25 = BM25Okapi(tokenized_corpus)
 
         texts = [c["content"] for c in self.chunks]
-        self.dense_matrix = self.embedder.encode(texts, normalize_embeddings=True)
+        self.dense_matrix = np.array(list(self.embedder.embed(texts)))
 
     def retrieve(self, query: str, top_k: int = 3, candidate_pool: int = 8) -> list[RetrievedChunk]:
         if not self.chunks:
@@ -67,7 +62,7 @@ class HybridRetriever:
         bm25_order = np.argsort(bm25_scores)[::-1]
         bm25_ranks = {int(idx): rank + 1 for rank, idx in enumerate(bm25_order)}
 
-        q_emb = self.embedder.encode([query], normalize_embeddings=True)[0]
+        q_emb = np.array(list(self.embedder.embed([query])))[0]
         dense_scores = np.dot(self.dense_matrix, q_emb)
         dense_order = np.argsort(dense_scores)[::-1]
         dense_ranks = {int(idx): rank + 1 for rank, idx in enumerate(dense_order)}
@@ -79,7 +74,6 @@ class HybridRetriever:
 
         top_candidates = sorted(rrf_scores.keys(), key=lambda i: rrf_scores[i], reverse=True)[:candidate_pool]
 
-        # Hybrid rerank score combining dense similarity + exact keyword overlap
         scored = []
         for idx in top_candidates:
             c_tokens = set(self._tokenize(self.chunks[idx]["content"]))
