@@ -4,7 +4,7 @@ import re
 import numpy as np
 from dataclasses import dataclass
 from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer, CrossEncoder
+from sentence_transformers import SentenceTransformer
 
 
 @dataclass
@@ -18,17 +18,15 @@ class RetrievedChunk:
 
 class HybridRetriever:
     """
-    Production Hybrid RAG Retriever:
-    1. Lexical search via BM25 (exact error codes, SOP IDs, headers)
-    2. Semantic search via Sentence-Transformers dense embeddings
-    3. Reciprocal Rank Fusion (RRF) to merge lexical + semantic rankings
-    4. Cross-Encoder reranking for high-precision top-k context selection
+    Memory-efficient Hybrid RAG Retriever:
+    1. Lexical search via BM25 (exact error codes, SOP IDs)
+    2. Semantic search via shared Sentence-Transformer embeddings
+    3. Reciprocal Rank Fusion (RRF) + exact token-overlap boost reranking
     """
 
-    def __init__(self, docs_dir: str = "data/docs"):
+    def __init__(self, docs_dir: str = "data/docs", embedder: SentenceTransformer | None = None):
         self.docs_dir = docs_dir
-        self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
-        self.reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        self.embedder = embedder or SentenceTransformer("all-MiniLM-L6-v2")
         self.chunks: list[dict] = []
         self._load_and_index()
 
@@ -44,7 +42,6 @@ class HybridRetriever:
 
             lines = raw_text.splitlines()
             title = lines[0].lstrip("# ").strip() if lines else filename
-            # Split bullet sections into granular, self-contained chunks
             for idx, line in enumerate(lines[1:], start=1):
                 clean = line.strip()
                 if clean.startswith("- "):
@@ -55,11 +52,9 @@ class HybridRetriever:
                         "content": chunk_text,
                     })
 
-        # Build BM25 lexical index
         tokenized_corpus = [self._tokenize(c["content"]) for c in self.chunks]
         self.bm25 = BM25Okapi(tokenized_corpus)
 
-        # Build Dense Vector index
         texts = [c["content"] for c in self.chunks]
         self.dense_matrix = self.embedder.encode(texts, normalize_embeddings=True)
 
@@ -67,18 +62,16 @@ class HybridRetriever:
         if not self.chunks:
             return []
 
-        # 1. BM25 scores & ranks
-        bm25_scores = self.bm25.get_scores(self._tokenize(query))
+        q_tokens = set(self._tokenize(query))
+        bm25_scores = self.bm25.get_scores(list(q_tokens))
         bm25_order = np.argsort(bm25_scores)[::-1]
         bm25_ranks = {int(idx): rank + 1 for rank, idx in enumerate(bm25_order)}
 
-        # 2. Dense cosine similarity scores & ranks
         q_emb = self.embedder.encode([query], normalize_embeddings=True)[0]
         dense_scores = np.dot(self.dense_matrix, q_emb)
         dense_order = np.argsort(dense_scores)[::-1]
         dense_ranks = {int(idx): rank + 1 for rank, idx in enumerate(dense_order)}
 
-        # 3. Reciprocal Rank Fusion (RRF, k=60)
         k_rrf = 60
         rrf_scores = {}
         for idx in range(len(self.chunks)):
@@ -86,35 +79,23 @@ class HybridRetriever:
 
         top_candidates = sorted(rrf_scores.keys(), key=lambda i: rrf_scores[i], reverse=True)[:candidate_pool]
 
-        # 4. Cross-Encoder Reranking on top candidates
-        pairs = [(query, self.chunks[idx]["content"]) for idx in top_candidates]
-        ce_scores = self.reranker.predict(pairs)
+        # Hybrid rerank score combining dense similarity + exact keyword overlap
+        scored = []
+        for idx in top_candidates:
+            c_tokens = set(self._tokenize(self.chunks[idx]["content"]))
+            overlap = len(q_tokens & c_tokens) / max(len(q_tokens), 1)
+            rerank_score = float(0.75 * dense_scores[idx] + 0.25 * overlap)
+            scored.append((idx, rerank_score))
 
-        reranked = sorted(
-            zip(top_candidates, ce_scores),
-            key=lambda x: float(x[1]),
-            reverse=True,
-        )[:top_k]
+        reranked = sorted(scored, key=lambda x: x[1], reverse=True)[:top_k]
 
-        results = []
-        for idx, ce_score in reranked:
-            c = self.chunks[idx]
-            results.append(
-                RetrievedChunk(
-                    doc_id=c["doc_id"],
-                    source_file=c["source_file"],
-                    content=c["content"],
-                    rrf_score=round(rrf_scores[idx], 4),
-                    rerank_score=round(float(ce_score), 4),
-                )
+        return [
+            RetrievedChunk(
+                doc_id=self.chunks[idx]["doc_id"],
+                source_file=self.chunks[idx]["source_file"],
+                content=self.chunks[idx]["content"],
+                rrf_score=round(rrf_scores[idx], 4),
+                rerank_score=round(score, 4),
             )
-        return results
-
-
-if __name__ == "__main__":
-    retriever = HybridRetriever()
-    q = "Why is our inference endpoint giving HTTP 502 Bad Gateway?"
-    hits = retriever.retrieve(q, top_k=3)
-    print(f"Query: {q}\n")
-    for h in hits:
-        print(f"[{h.doc_id}] (rerank={h.rerank_score}) -> {h.content}")
+            for idx, score in reranked
+        ]

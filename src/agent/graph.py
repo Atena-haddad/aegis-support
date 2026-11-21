@@ -42,8 +42,9 @@ class TicketState(TypedDict):
 class AegisAgentOrchestrator:
     def __init__(self):
         self.guardrail = PIIGuardrail()
-        self.router = MLTriageRouter()
-        self.retriever = HybridRetriever()
+        shared_embedder = __import__("sentence_transformers").SentenceTransformer("all-MiniLM-L6-v2")
+        self.router = MLTriageRouter(embedder=shared_embedder)
+        self.retriever = HybridRetriever(embedder=shared_embedder)
 
         primary_model = os.getenv("LLM_MODEL", "gemini-3.8-flash")
         fallback_model = os.getenv("LLM_FALLBACK_MODEL", "gemini-3.5-flash-lite")
